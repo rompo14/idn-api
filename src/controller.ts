@@ -4,6 +4,7 @@ import { LooseObject } from './utils/types';
 const domain = require('domain-info');
 const punycodeRegex = require("punycode-regex");
 
+
 export class Controller {
     public static encodePuny(req: Request, res: Response): void {
         try {
