@@ -14,7 +14,7 @@ export class Controller {
             if (punycodeRegex().test(d))
                 throw new StatusError('Указанная строка уже зашифрована', 400);
 
-            res.json({success: true, result: domain.punycode(d)}).status(200);
+            res.json({success: true, result: domain.punycode((d as string).toLowerCase())}).status(200);
         } catch (e) {
             setError(e, res);
         }
@@ -29,7 +29,7 @@ export class Controller {
             if (!punycodeRegex().test(d))
                 throw new StatusError('Указанная строка не является ACE-последовательностью', 400);
 
-            res.json({success: true, result: domain.punycode(d)});
+            res.json({success: true, result: domain.punycode((d as string).toLowerCase())});
         } catch (e) {
             setError(e, res);
         }
@@ -41,7 +41,7 @@ export class Controller {
 
             if (!d) throw new StatusError('param domain as "d" is required', 400);
 
-            res.json({success: true, result: domain.punycode(d)}).status(200);
+            res.json({success: true, result: domain.punycode((d as string).toLowerCase())}).status(200);
         } catch (e) {
             setError(e, res);
         }
@@ -53,7 +53,7 @@ export class Controller {
 
             if (!d) throw new StatusError('param domain as "d" is required', 400);
 
-            res.json({success: true, result: punycodeRegex().test(d)}).status(200);
+            res.json({success: true, result: punycodeRegex().test((d as string).toLowerCase())}).status(200);
         } catch (e) {
             setError(e, res);
         }
@@ -101,7 +101,7 @@ export class Controller {
             if (!e) throw new StatusError('param email as "e" is required', 400);
 
             const parts = (e as string).split('@');
-            const result = domain.punycode(parts[0]) + '@' + domain.punycode(parts[1]);
+            const result = domain.punycode(parts[0].toLowerCase()) + '@' + domain.punycode(parts[1].toLowerCase());
 
             res.json({success: true, result}).status(200);
         } catch (e) {
